@@ -29,6 +29,7 @@
 
       <div class="home-footer">
         <button id="add-entry-btn" class="btn btn-secondary">+ Add New Entry</button>
+        <button id="view-entries-btn" class="btn btn-secondary">View Existing Entries</button>
       </div>
     </div>
   </div>
@@ -131,6 +132,17 @@
           <button type="submit" class="btn btn-primary">Add Entry</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ========== VIEW ENTRIES MODAL ========== -->
+  <div id="view-entries-overlay" class="modal-overlay">
+    <div class="view-entries-modal">
+      <div class="modal-header">
+        <h2>Existing Entries</h2>
+        <button id="close-view-entries-btn" class="btn-close">&times;</button>
+      </div>
+      <div id="view-entries-list" class="view-entries-list"></div>
     </div>
   </div>
 

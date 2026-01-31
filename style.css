@@ -248,6 +248,9 @@ body {
 
 .home-footer {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
 }
 
 /* ===== CATEGORY SCREEN ===== */
@@ -658,6 +661,93 @@ body {
   margin-top: 24px;
 }
 
+/* ===== VIEW ENTRIES MODAL ===== */
+.view-entries-modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: popIn 0.3s ease;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.view-entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.view-entries-category-header {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.view-entries-category-header .category-icon {
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.view-entries-count {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-text-light);
+}
+
+.view-entries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.view-entry-card {
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.view-entry-card:hover {
+  border-color: var(--color-border);
+}
+
+.view-entry-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.view-entry-image {
+  width: 100%;
+  height: 90px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  background: white;
+}
+
+.view-entry-preview {
+  font-size: 12px;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.view-entries-empty {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: 40px 20px;
+  font-size: 15px;
+}
+
 /* ===== CONFETTI ===== */
 #confetti-container {
   position: fixed;
@@ -734,6 +824,11 @@ body {
 
   .new-profile-form {
     flex-direction: column;
+  }
+
+  .home-footer {
+    flex-direction: column;
+    align-items: center;
   }
 
   .logo {
