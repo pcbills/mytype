@@ -521,6 +521,70 @@ function submitNewEntry(e) {
   if (screens.category.classList.contains('active')) renderCategoryScreen();
 }
 
+// ===== VIEW ENTRIES =====
+function showViewEntriesModal() {
+  const list = $('view-entries-list');
+  list.innerHTML = '';
+
+  const categories = getAllCategories();
+  const allEntries = getAllEntries();
+
+  categories.forEach(cat => {
+    const entries = allEntries.filter(e => e.category === cat.id);
+    if (entries.length === 0) return;
+
+    const section = document.createElement('div');
+    section.className = 'view-entries-category';
+
+    const header = document.createElement('div');
+    header.className = 'view-entries-category-header';
+    header.innerHTML = `<span class="category-icon">${cat.icon}</span> ${escapeHtml(cat.name)} <span class="view-entries-count">(${entries.length})</span>`;
+    section.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'view-entries-grid';
+
+    entries.forEach(entry => {
+      const card = document.createElement('div');
+      card.className = 'view-entry-card';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'view-entry-title';
+      titleEl.textContent = entry.title;
+      card.appendChild(titleEl);
+
+      if (entry.imageUrl) {
+        const img = document.createElement('img');
+        img.className = 'view-entry-image';
+        img.src = entry.imageUrl;
+        img.alt = entry.title;
+        img.onerror = function() { this.style.display = 'none'; };
+        card.appendChild(img);
+      }
+
+      const preview = document.createElement('div');
+      preview.className = 'view-entry-preview';
+      preview.textContent = entry.text.length > 120 ? entry.text.substring(0, 120) + '...' : entry.text;
+      card.appendChild(preview);
+
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    list.appendChild(section);
+  });
+
+  if (list.children.length === 0) {
+    list.innerHTML = '<p class="view-entries-empty">No entries yet. Add some using the "Add New Entry" button!</p>';
+  }
+
+  $('view-entries-overlay').classList.add('active');
+}
+
+function hideViewEntriesModal() {
+  $('view-entries-overlay').classList.remove('active');
+}
+
 // ===== CONFETTI =====
 function createConfetti() {
   const container = $('confetti-container');
@@ -593,6 +657,10 @@ document.addEventListener('DOMContentLoaded', () => {
   $('cancel-entry-btn').addEventListener('click', hideAddEntryModal);
   $('close-modal-btn').addEventListener('click', hideAddEntryModal);
 
+  // View entries modal
+  $('view-entries-btn').addEventListener('click', showViewEntriesModal);
+  $('close-view-entries-btn').addEventListener('click', hideViewEntriesModal);
+
   // Global keyboard handler
   document.addEventListener('keydown', (e) => {
     // Ignore if a form input is focused (except during game)
@@ -627,9 +695,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Close modal on backdrop click
+  // Close modals on backdrop click
   $('add-entry-overlay').addEventListener('click', (e) => {
     if (e.target === $('add-entry-overlay')) hideAddEntryModal();
+  });
+
+  $('view-entries-overlay').addEventListener('click', (e) => {
+    if (e.target === $('view-entries-overlay')) hideViewEntriesModal();
   });
 
   $('victory-overlay').addEventListener('click', (e) => {
