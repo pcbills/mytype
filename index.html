@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyType - Typing Practice Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== HOME SCREEN ========== -->
+  <div id="home-screen" class="screen active">
+    <div class="container">
+      <div class="home-header">
+        <h1 class="logo">MyType</h1>
+        <p class="subtitle">Pick your profile to start typing!</p>
+      </div>
+
+      <div class="profiles-section">
+        <div id="profiles-list" class="profiles-grid"></div>
+        <div class="new-profile-form">
+          <input type="text" id="new-profile-input" placeholder="Type a new name..." maxlength="20" autocomplete="off">
+          <button id="create-profile-btn" class="btn btn-primary">Create Profile</button>
+        </div>
+      </div>
+
+      <div class="home-footer">
+        <button id="add-entry-btn" class="btn btn-secondary">+ Add New Entry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== CATEGORY SCREEN ========== -->
+  <div id="category-screen" class="screen">
+    <div class="container">
+      <div class="category-header">
+        <button id="back-to-home-btn" class="btn btn-back">&larr; Switch Profile</button>
+        <div class="player-info">
+          <h2>Welcome, <span id="player-name"></span>!</h2>
+          <div id="profile-stats-bar" class="stats-bar"></div>
+        </div>
+      </div>
+
+      <p class="section-title">What do you want to type about?</p>
+      <div id="categories-list" class="categories-grid"></div>
+    </div>
+  </div>
+
+  <!-- ========== GAME SCREEN ========== -->
+  <div id="game-screen" class="screen">
+    <div class="game-container">
+      <div class="game-header">
+        <button id="back-to-categories-btn" class="btn btn-back">&larr; Categories</button>
+        <h2 id="entry-title" class="entry-title"></h2>
+        <div id="live-stats" class="live-stats">
+          <span id="live-wpm">0 WPM</span>
+          <span id="live-accuracy">100%</span>
+        </div>
+      </div>
+
+      <div class="game-area">
+        <div class="game-image-wrapper">
+          <img id="entry-image" src="" alt="" onerror="this.style.display='none'">
+        </div>
+        <div class="game-typing-wrapper">
+          <div id="typing-text" class="typing-text"></div>
+        </div>
+      </div>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="start-overlay">
+        <div class="start-overlay-content">
+          <p>Press <strong>Enter</strong> to start typing</p>
+          <p id="start-overlay-title" class="start-overlay-entry-title"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== VICTORY POPUP ========== -->
+  <div id="victory-overlay" class="modal-overlay">
+    <div class="victory-popup">
+      <h2 class="victory-title">Great Job!</h2>
+      <div id="victory-stats" class="victory-stats"></div>
+      <div class="victory-buttons">
+        <button id="play-next-btn" class="btn btn-primary btn-large">
+          Play Next Entry in <span id="victory-category-name"></span> <span class="key-hint">(Enter)</span>
+        </button>
+        <button id="pick-category-btn" class="btn btn-secondary btn-large">
+          Pick a New Category <span class="key-hint">(Backspace)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ADD ENTRY MODAL ========== -->
+  <div id="add-entry-overlay" class="modal-overlay">
+    <div class="add-entry-modal">
+      <div class="modal-header">
+        <h2>Add New Entry</h2>
+        <button id="close-modal-btn" class="btn-close">&times;</button>
+      </div>
+      <form id="add-entry-form">
+        <div class="form-group">
+          <label for="entry-category-select">Category</label>
+          <select id="entry-category-select">
+            <option value="">-- Select a category --</option>
+          </select>
+        </div>
+        <div id="new-category-group" class="form-group" style="display:none">
+          <label for="new-category-input">New Category Name</label>
+          <input type="text" id="new-category-input" placeholder="e.g., Space, Music, Sports..." maxlength="30">
+        </div>
+        <div class="form-group">
+          <label for="entry-title-input">Entry Title</label>
+          <input type="text" id="entry-title-input" placeholder="e.g., Red Panda" maxlength="60" required>
+        </div>
+        <div class="form-group">
+          <label for="entry-image-input">Image URL</label>
+          <input type="url" id="entry-image-input" placeholder="https://example.com/image.jpg">
+        </div>
+        <div class="form-group">
+          <label for="entry-text-input">Text to Type</label>
+          <textarea id="entry-text-input" rows="6" placeholder="Enter the text the player will type..." required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancel-entry-btn" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== CONFETTI CONTAINER ========== -->
+  <div id="confetti-container"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
