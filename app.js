@@ -9,6 +9,7 @@ let totalKeystrokes = 0;
 let startTime = null;
 let charSpans = [];
 let liveStatsInterval = null;
+let editingEntryId = null;
 
 // ===== DOM REFS =====
 const $ = (id) => document.getElementById(id);
@@ -21,6 +22,7 @@ const screens = {
 // ===== STORAGE =====
 const PROFILES_KEY = 'mytype_profiles';
 const CUSTOM_ENTRIES_KEY = 'mytype_custom_entries';
+const ENTRY_OVERRIDES_KEY = 'mytype_entry_overrides';
 
 function loadProfiles() {
   return JSON.parse(localStorage.getItem(PROFILES_KEY) || '{}');
@@ -38,9 +40,21 @@ function saveCustomEntries(entries) {
   localStorage.setItem(CUSTOM_ENTRIES_KEY, JSON.stringify(entries));
 }
 
+function loadEntryOverrides() {
+  return JSON.parse(localStorage.getItem(ENTRY_OVERRIDES_KEY) || '{}');
+}
+
+function saveEntryOverrides(overrides) {
+  localStorage.setItem(ENTRY_OVERRIDES_KEY, JSON.stringify(overrides));
+}
+
 // ===== DATA HELPERS =====
 function getAllEntries() {
-  return [...DEFAULT_ENTRIES, ...loadCustomEntries()];
+  const overrides = loadEntryOverrides();
+  const defaults = DEFAULT_ENTRIES.map(entry =>
+    overrides[entry.id] ? { ...entry, ...overrides[entry.id] } : entry
+  );
+  return [...defaults, ...loadCustomEntries()];
 }
 
 function getAllCategories() {
@@ -475,6 +489,9 @@ function showAddEntryModal() {
 
 function hideAddEntryModal() {
   $('add-entry-overlay').classList.remove('active');
+  editingEntryId = null;
+  $('add-entry-modal-title').textContent = 'Add New Entry';
+  $('add-entry-submit-btn').textContent = 'Add Entry';
 }
 
 function submitNewEntry(e) {
@@ -500,6 +517,41 @@ function submitNewEntry(e) {
   const text = $('entry-text-input').value.trim();
 
   if (!title || !text) return;
+
+  if (editingEntryId) {
+    // Edit mode — update existing entry
+    const isCustom = editingEntryId.startsWith('custom-');
+    if (isCustom) {
+      const customEntries = loadCustomEntries();
+      const idx = customEntries.findIndex(e => e.id === editingEntryId);
+      if (idx !== -1) {
+        customEntries[idx] = {
+          ...customEntries[idx],
+          category: categoryId,
+          categoryName,
+          title,
+          imageUrl: imageUrl || '',
+          text,
+        };
+        saveCustomEntries(customEntries);
+      }
+    } else {
+      // Default entry — save override
+      const overrides = loadEntryOverrides();
+      overrides[editingEntryId] = {
+        category: categoryId,
+        categoryName,
+        title,
+        imageUrl: imageUrl || '',
+        text,
+      };
+      saveEntryOverrides(overrides);
+    }
+
+    hideAddEntryModal();
+    showViewEntriesModal();
+    return;
+  }
 
   const newEntry = {
     id: `custom-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
@@ -567,6 +619,16 @@ function showViewEntriesModal() {
       preview.textContent = entry.text.length > 120 ? entry.text.substring(0, 120) + '...' : entry.text;
       card.appendChild(preview);
 
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn btn-edit-entry';
+      editBtn.textContent = 'Edit';
+      editBtn.onclick = (e) => {
+        e.stopPropagation();
+        hideViewEntriesModal();
+        showEditEntryModal(entry.id);
+      };
+      card.appendChild(editBtn);
+
       grid.appendChild(card);
     });
 
@@ -583,6 +645,41 @@ function showViewEntriesModal() {
 
 function hideViewEntriesModal() {
   $('view-entries-overlay').classList.remove('active');
+}
+
+// ===== EDIT ENTRY =====
+function showEditEntryModal(entryId) {
+  editingEntryId = entryId;
+  const entry = getAllEntries().find(e => e.id === entryId);
+  if (!entry) return;
+
+  // Setup category selector
+  const select = $('entry-category-select');
+  select.innerHTML = '<option value="">-- Select a category --</option>';
+  const categories = getAllCategories();
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat.id;
+    option.textContent = cat.name;
+    select.appendChild(option);
+  });
+  const newOption = document.createElement('option');
+  newOption.value = '__new__';
+  newOption.textContent = '+ Create New Category';
+  select.appendChild(newOption);
+
+  // Pre-populate fields
+  select.value = entry.category;
+  $('new-category-group').style.display = 'none';
+  $('entry-title-input').value = entry.title;
+  $('entry-image-input').value = entry.imageUrl;
+  $('entry-text-input').value = entry.text;
+
+  // Update modal title and button for edit mode
+  $('add-entry-modal-title').textContent = 'Edit Entry';
+  $('add-entry-submit-btn').textContent = 'Save Changes';
+
+  $('add-entry-overlay').classList.add('active');
 }
 
 // ===== CONFETTI =====
