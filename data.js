@@ -113,7 +113,7 @@ const DEFAULT_ENTRIES = [
     id: 'videogames-fortnite',
     category: 'videogames',
     title: 'Fortnite',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Fortnite_%28Chapter_2%29_logo.png/640px-Fortnite_%28Chapter_2%29_logo.png',
+    imageUrl: 'https://cdn2.unrealengine.com/Fortnite%2Fblog%2Fpatch-v-1-6---fortnite-battle-royale%2FFortnite_BR_Key-Art_w-Logo_ENG-1920x1080-3e2ce1453476b725fa59e7aeb6ecb90e4b75a0df.jpg',
     text: 'Fortnite is a popular battle royale game developed by Epic Games that took the gaming world by storm when it was released in 2017. In the main Battle Royale mode, 100 players drop onto an island and compete to be the last player standing. Players must find weapons, build structures for defense, and survive as the play area shrinks over time. Fortnite is known for its colorful art style, fun dance emotes, and frequent collaborations with movies, music artists, and other games. The game is free to play and is available on almost every gaming platform.'
   },
 
@@ -129,28 +129,28 @@ const DEFAULT_ENTRIES = [
     id: 'science-volcanoes',
     category: 'science',
     title: 'Volcanoes',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Mt_Cleveland_eruption_2006.jpg/640px-Mt_Cleveland_eruption_2006.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Raden_Saleh_-_Merapi_volcano%2C_eruption_at_night%2C_1865.jpg',
     text: 'A volcano is an opening in the Earth\'s surface where hot molten rock called magma escapes from deep underground. When magma reaches the surface, it is called lava, and it can flow down the sides of the volcano destroying everything in its path. There are about 1,500 active volcanoes on Earth, and they are often found along the edges of tectonic plates. The largest volcano in our solar system is Olympus Mons on Mars, which is nearly three times taller than Mount Everest. Volcanic eruptions can be dangerous, but they also create new land and produce fertile soil for farming.'
   },
   {
     id: 'science-dinosaurs',
     category: 'science',
     title: 'Dinosaurs',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Tyrannosaurus_rex_Holotype.jpg/640px-Tyrannosaurus_rex_Holotype.jpg',
+    imageUrl: 'https://www.archaeology.wiki/wp-content/uploads/2025/05/T_Rex.jpg',
     text: 'Dinosaurs were a group of reptiles that ruled the Earth for over 160 million years before going extinct about 66 million years ago. They came in all shapes and sizes, from the massive Argentinosaurus, which was over 100 feet long, to the tiny Microraptor, which was about the size of a crow. Scientists believe that a giant asteroid hit the Earth and caused dramatic climate changes that the dinosaurs could not survive. However, not all dinosaurs disappeared. Modern birds are actually living dinosaurs, descended from small feathered dinosaurs that survived the extinction event.'
   },
   {
     id: 'science-water-cycle',
     category: 'science',
     title: 'The Water Cycle',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Water_Cycle-en.png/640px-Water_Cycle-en.png',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Watercyclesummary.jpg',
     text: 'The water cycle is the continuous journey that water takes as it moves between the Earth\'s surface and the atmosphere. It begins when the Sun heats up water in oceans, lakes, and rivers, causing it to evaporate and rise into the air as water vapor. As the water vapor rises higher, it cools down and condenses into tiny droplets that form clouds. When the droplets in clouds become heavy enough, they fall back to Earth as precipitation, which can be rain, snow, sleet, or hail. The water then flows into rivers and streams, soaks into the ground, or collects in lakes and oceans, and the cycle begins again.'
   },
   {
     id: 'science-electricity',
     category: 'science',
     title: 'Electricity',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Lightning_over_Oradea_Romania_2.jpg/640px-Lightning_over_Oradea_Romania_2.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Electricity_grid_schema-_lang-en.jpg',
     text: 'Electricity is a form of energy that powers almost everything in our modern world, from lights and computers to refrigerators and video games. It is created by the movement of tiny particles called electrons, which flow through materials like metal wires in a path called a circuit. Electricity can be generated in many ways, including using wind turbines, solar panels, hydroelectric dams, and power plants that burn fossil fuels. Lightning is a powerful natural form of electricity that occurs during thunderstorms when electrical charges build up in clouds. Scientists like Benjamin Franklin and Thomas Edison made important discoveries that helped us understand and use electricity.'
   },
 ];
