@@ -92,14 +92,14 @@ const DEFAULT_ENTRIES = [
     id: 'videogames-super-mario',
     category: 'videogames',
     title: 'Super Mario',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/a/a9/MarioNSMBUDeluxe.png',
+    imageUrl: 'https://mario.wiki.gallery/images/thumb/3/3e/MPSS_Mario.png/200px-MPSS_Mario.png',
     text: 'Super Mario is one of the most iconic video game characters ever created by Nintendo. Mario is a friendly Italian plumber who goes on adventures to rescue Princess Peach from the villain Bowser. The first Super Mario Bros. game was released in 1985 and helped save the video game industry from a major crash. Mario is known for his red hat, blue overalls, and his ability to jump on enemies and power up with mushrooms and fire flowers. The Super Mario series has sold hundreds of millions of copies and continues to be popular with gamers of all ages.'
   },
   {
     id: 'videogames-zelda',
     category: 'videogames',
     title: 'The Legend of Zelda',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/3/3f/Legend_of_Zelda_-_Tears_of_the_Kingdom_logo.png',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg',
     text: 'The Legend of Zelda is a beloved action-adventure video game series created by Nintendo. Players control a hero named Link who must rescue Princess Zelda and save the land of Hyrule from the evil Ganondorf. The series is known for its challenging puzzles, exciting combat, and vast worlds to explore. The first game was released in 1986 and introduced many features that are now standard in adventure games. Breath of the Wild and Tears of the Kingdom are among the highest-rated video games ever made, praised for their open-world exploration.'
   },
   {
