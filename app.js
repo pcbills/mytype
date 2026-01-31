@@ -313,9 +313,38 @@ function updateLiveStats() {
   $('live-accuracy').textContent = `${accuracy}%`;
 }
 
+function charsMatch(typed, expected) {
+  if (typed === expected) return true;
+  // Accept base letter for accented characters (e.g. "e" for "é")
+  const normalized = expected.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return typed === normalized;
+}
+
 function handleTypingKey(e) {
   if (gameState !== 'playing') return;
   if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+  // Handle backspace
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    if (typingPosition > 0) {
+      // Remove current marker from current position
+      if (typingPosition < charSpans.length) {
+        charSpans[typingPosition].classList.remove('current');
+      }
+      typingPosition--;
+      // Undo error if this character was incorrect
+      if (charSpans[typingPosition].classList.contains('incorrect')) {
+        errors--;
+      }
+      // Reset the character state
+      charSpans[typingPosition].classList.remove('correct', 'incorrect');
+      charSpans[typingPosition].classList.add('current');
+      scrollCurrentCharIntoView();
+    }
+    return;
+  }
+
   if (e.key.length !== 1) return; // only printable characters
 
   e.preventDefault();
@@ -324,7 +353,7 @@ function handleTypingKey(e) {
   const typedChar = e.key;
   totalKeystrokes++;
 
-  const correct = typedChar === expectedChar;
+  const correct = charsMatch(typedChar, expectedChar);
   if (!correct) errors++;
 
   // Update display
