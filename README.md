@@ -19,13 +19,6 @@ Each entry needs:
 - An **image URL** (displayed alongside the text)
 - The **text to type** (the passage the player will practice)
 
-## Deploying to GitHub Pages
-
-1. Push to your GitHub repository
-2. Go to Settings > Pages
-3. Set source to your branch and root folder
-4. The game will be available at `https://[username].github.io/mytype/`
-
 ## Tech Stack
 
 Pure HTML, CSS, and JavaScript. No build tools or dependencies required.
